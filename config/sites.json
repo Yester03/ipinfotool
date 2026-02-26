@@ -1,0 +1,14 @@
+[
+  // List of domains used for the connectivity test.  The browser will attempt
+  // to fetch a small resource from each domain and measure round‑trip time.
+  // You can customise this list to include sites relevant to your location or
+  // use case.  Avoid sites that block cross‑origin requests or require HTTPS.
+  "https://www.google.com",
+  "https://github.com",
+  "https://www.youtube.com",
+  "https://www.cloudflare.com",
+  "https://www.bilibili.com",
+  "https://www.taobao.com",
+  "https://openai.com",
+  "https://www.jd.com"
+]

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP/Network Toolbox – IP Intelligence</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>IP Intelligence</h1>
+    <p>
+      Enter an IP address to fetch geolocation and network details from multiple providers.  Leave blank to analyse your own IP.  Results are cached in your browser to respect provider rate limits.
+    </p>
+    <form id="lookup-form">
+      <input type="text" id="ip-input" placeholder="Enter IP address (optional)" style="width: 70%; padding: 0.5rem;" />
+      <button type="submit" style="padding: 0.5rem 1rem;">Lookup</button>
+    </form>
+    <div id="intel-results" style="margin-top: 1rem;">
+      <table id="intel-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Country</th>
+            <th>Region</th>
+            <th>City</th>
+            <th>ASN</th>
+            <th>Org</th>
+            <th>ISP</th>
+          </tr>
+        </thead>
+        <tbody id="intel-body"></tbody>
+      </table>
+    </div>
+    <div id="intel-error" class="error"></div>
+  </div>
+  <script type="module" src="/static/scripts/ip_intel.js"></script>
+</body>
+</html>

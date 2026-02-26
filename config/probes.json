@@ -1,0 +1,21 @@
+{
+  // Example probe definitions for the split tunnel test.  Each category
+  // groups a set of endpoints that simply return the caller's IP address.
+  // When the browser requests these endpoints, the IP observed in the
+  // response indicates which egress path is used (domestic vs international
+  // vs specialised categories).
+  "domestic": [
+    "https://probe-cn1.example.com/ip", // replace with your own probes
+    "https://probe-cn2.example.com/ip"
+  ],
+  "international": [
+    "https://probe-us1.example.com/ip",
+    "https://probe-eu1.example.com/ip"
+  ],
+  "ai": [
+    "https://probe-ai.example.com/ip"
+  ],
+  "static": [
+    "https://probe-static.example.com/ip"
+  ]
+}

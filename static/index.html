@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP/Network Toolbox – Local IP Lookup</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Local IP Lookup</h1>
+    <p>
+      This tool displays your IPv4/IPv6 address and geolocation information from multiple providers.  Use the toggles below to hide sensitive information.
+    </p>
+    <div class="toggle">
+      <label><input type="checkbox" id="toggle-ip" /> Hide IP addresses</label>
+    </div>
+    <div class="toggle">
+      <label><input type="checkbox" id="toggle-geo" /> Hide geolocation details</label>
+    </div>
+    <div id="ip-info">
+      <strong>IPv4:</strong> <span id="ipv4">Loading…</span><br />
+      <strong>IPv6:</strong> <span id="ipv6">Loading…</span>
+    </div>
+    <div id="geo-info">
+      <h2>Geolocation / ASN (Multiple Providers)</h2>
+      <table id="providers-table">
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Country</th>
+            <th>Region</th>
+            <th>City</th>
+            <th>ASN</th>
+            <th>Org</th>
+            <th>ISP</th>
+          </tr>
+        </thead>
+        <tbody id="providers-body">
+          <!-- dynamically filled -->
+        </tbody>
+      </table>
+    </div>
+    <div id="connectivity">
+      <h2>Connectivity Test</h2>
+      <p>Measuring round‑trip time to common sites (lower is better).  Each test times out after 5 s.</p>
+      <table id="ping-table">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Status</th>
+            <th>RTT (ms)</th>
+          </tr>
+        </thead>
+        <tbody id="ping-body">
+          <!-- results will appear here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="module" src="/static/scripts/index.js"></script>
+</body>
+</html>

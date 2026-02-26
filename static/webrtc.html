@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP/Network Toolbox – WebRTC Leak Test</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>WebRTC Leak Test</h1>
+    <p>
+      WebRTC can reveal your internal or public IP addresses when establishing peer connections.  This test creates an <code>RTCPeerConnection</code> and collects ICE candidates from several STUN servers to check for potential leaks.  Click the button below to start.
+    </p>
+    <button id="start-btn" style="padding: 0.5rem 1rem;">Start Test</button>
+    <div id="webrtc-results" style="margin-top: 1rem;"></div>
+    <div id="webrtc-note" style="margin-top: 1rem; font-style: italic;"></div>
+  </div>
+  <script type="module" src="/static/scripts/webrtc.js"></script>
+</body>
+</html>
