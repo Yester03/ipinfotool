@@ -53,3 +53,10 @@ class IPIntelResponse(BaseModel):
     providers: List[ProviderResult] = Field(
         ..., description="Results from multiple providers with geolocation and network data"
     )
+
+
+class RequestMetaResponse(BaseModel):
+    """Response for /api/request_meta containing proxy-related request metadata."""
+
+    client_ip: Optional[str] = Field(None, description="Observed client IP from the socket")
+    headers: Dict[str, str] = Field(default_factory=dict, description="Selected request headers")

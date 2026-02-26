@@ -45,6 +45,7 @@ The code includes design notes for optional features which can be implemented la
 │                              Backend (FastAPI)                               │
 │  - `/api/local_ip` : get IPv4/IPv6 + geo/ASN from multiple providers         │
 │  - `/api/ip_intel` : aggregate IP intelligence across providers              │
+│  - `/api/request_meta` : show forwarded/proxy headers                        │
 │  - Provides static files under `/`                                           │
 │  - Implements timeouts, retries and error handling                           │
 │  - No persistent storage; privacy‑friendly (logs can be disabled)            │
@@ -68,6 +69,7 @@ ip_network_toolbox_mvp/
 │   ├── probes.json           – sample probe definitions for split tunnel test
 │   └── sites.json            – list of sites for connectivity tests
 ├── static/
+│   ├── whoami.html           – compact page similar to ip.skk.moe
 │   ├── index.html            – Local IP lookup page
 │   ├── ip_intel.html         – IP intelligence page
 │   ├── webrtc.html           – WebRTC leak test page
@@ -75,10 +77,19 @@ ip_network_toolbox_mvp/
 │   └── scripts/
 │       ├── common.js         – shared JS helpers (fetch wrapper, UI)
 │       ├── index.js          – behaviour for index.html
+│       ├── whoami.js         – behaviour for whoami.html
 │       ├── ip_intel.js       – behaviour for ip_intel.html
 │       └── webrtc.js         – behaviour for webrtc.html
 └── requirements.txt          – Python dependencies
 ```
+
+
+## Quick Routes
+
+- `/`：简洁 IP 检测页（类似 ip.skk.moe）
+- `/toolbox`：原完整工具页
+- `/ip-intel`：指定 IP 多源信息比对
+- `/webrtc`：WebRTC 泄露检测
 
 ## Installation
 

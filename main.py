@@ -10,18 +10,17 @@ in parallel and returns normalised responses.
 from __future__ import annotations
 
 import asyncio
-import os
 from pathlib import Path
 from typing import Optional
 
 import httpx
-from fastapi import FastAPI, Request, Depends, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from .models import LocalIPResponse, IPIntelResponse, IPIntelRequest, ProviderResult
-from .ip_providers import fetch_providers
+from models import LocalIPResponse, IPIntelResponse, IPIntelRequest, ProviderResult, RequestMetaResponse
+from ip_providers import fetch_providers
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -44,7 +43,14 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 @app.get("/", include_in_schema=False)
 async def root() -> FileResponse:
-    """Serve the main Local IP lookup page."""
+    """Serve a compact IP diagnostics page similar to ip.skk.moe."""
+    index_path = STATIC_DIR / "whoami.html"
+    return FileResponse(index_path)
+
+
+@app.get("/toolbox", include_in_schema=False)
+async def toolbox_page() -> FileResponse:
+    """Serve the original toolbox landing page."""
     index_path = STATIC_DIR / "index.html"
     return FileResponse(index_path)
 
@@ -110,6 +116,25 @@ async def ip_intel_endpoint(payload: IPIntelRequest) -> IPIntelResponse:
 async def ip_intel_endpoint_get(ip: Optional[str] = None) -> IPIntelResponse:
     """GET variant of IP intelligence endpoint for convenience in browser queries."""
     return await ip_intel_endpoint(IPIntelRequest(ip=ip))
+
+
+@app.get("/api/request_meta", response_model=RequestMetaResponse)
+async def request_meta_endpoint(request: Request) -> RequestMetaResponse:
+    """Expose request metadata useful for debugging proxy/CDN deployments."""
+    headers_of_interest = [
+        "x-forwarded-for",
+        "x-real-ip",
+        "cf-connecting-ip",
+        "cf-ipcountry",
+        "x-forwarded-proto",
+        "via",
+        "user-agent",
+    ]
+    header_map = {k: request.headers.get(k) for k in headers_of_interest if request.headers.get(k)}
+    return RequestMetaResponse(
+        client_ip=request.client.host if request.client else None,
+        headers=header_map,
+    )
 
 
 # 404 handler for unknown routes – helps debugging when static pages are missing
