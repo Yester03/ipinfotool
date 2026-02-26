@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP 信息检测</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="whoami-wrap">
+    <header class="whoami-head">
+      <h1>IP 信息检测</h1>
+      <div class="whoami-actions">
+        <button id="refresh-btn" type="button">刷新检测</button>
+        <a href="/toolbox">完整工具箱</a>
+      </div>
+    </header>
+    <p class="whoami-sub">类似 ip.skk.moe 的简洁页面：展示当前出口 IP、网络归属和代理头信息，适合 VPS/代理部署后快速验证。</p>
+
+    <section class="card-grid">
+      <article class="card">
+        <h2>公网地址</h2>
+        <div class="kv"><span>IPv4</span><code id="ipv4">加载中...</code></div>
+        <div class="kv"><span>IPv6</span><code id="ipv6">加载中...</code></div>
+        <div class="kv"><span>Socket 来源</span><code id="client-ip">加载中...</code></div>
+      </article>
+
+      <article class="card">
+        <h2>地理与网络</h2>
+        <div class="kv"><span>国家/地区</span><strong id="country">-</strong></div>
+        <div class="kv"><span>省市</span><strong id="region-city">-</strong></div>
+        <div class="kv"><span>ASN</span><strong id="asn">-</strong></div>
+        <div class="kv"><span>组织</span><strong id="org">-</strong></div>
+        <div class="kv"><span>ISP</span><strong id="isp">-</strong></div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>关键代理头</h2>
+      <table>
+        <thead><tr><th>Header</th><th>Value</th></tr></thead>
+        <tbody id="meta-body"></tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>多数据源对比</h2>
+      <table>
+        <thead>
+          <tr><th>Provider</th><th>状态</th><th>国家</th><th>城市</th><th>ASN</th><th>组织</th></tr>
+        </thead>
+        <tbody id="providers-body"></tbody>
+      </table>
+      <p id="last-updated" class="whoami-sub"></p>
+    </section>
+  </main>
+  <script type="module" src="/static/scripts/whoami.js"></script>
+</body>
+</html>

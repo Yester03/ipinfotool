@@ -20,7 +20,7 @@ import os
 from typing import Optional
 
 import httpx
-from .models import GeoInfo, ProviderResult
+from models import GeoInfo, ProviderResult
 
 
 async def fetch_ipapi(ip: Optional[str] = None) -> ProviderResult:
@@ -207,10 +207,8 @@ async def fetch_providers(ip: Optional[str] = None) -> list[ProviderResult]:
     # Add ipdata provider only if key is set
     if os.getenv("IPDATA_API_KEY"):
         tasks.append(fetch_ipdata(ip))
-    results = await httpx.AsyncClient().gather(*tasks, return_exceptions=False)  # type: ignore[attr-defined]
-    # httpx.AsyncClient.gather isn't available; fallback to asyncio.gather
     import asyncio
-    results = await asyncio.gather(*tasks, return_exceptions=True)  # type: ignore
+    results = await asyncio.gather(*tasks, return_exceptions=True)
     normalized: list[ProviderResult] = []
     for res in results:
         if isinstance(res, ProviderResult):
